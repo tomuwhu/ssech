@@ -3,7 +3,7 @@ var SSE  = require('sse'),
     rf   = require('./static'),
     ct   = [],
 //  myip = '192.168.1.103', //set your public ip
-    myip = 'http://www.inf.u-szeged.hu',     //or localhost to test in locale
+    myip = 'http://www.inf.u-szeged.hu/',     //or localhost to test in locale
     port = 3004,            //set your port number (http://192.168.1.103:8080/)
     base = '/' ;
 
