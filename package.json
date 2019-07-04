@@ -1,0 +1,14 @@
+{
+  "name": "ssech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sse": "0.0.8"
+  }
+}

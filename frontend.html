@@ -1,0 +1,9 @@
+<meta charset='utf-8' />
+<script>
+    var es = new EventSource("/sse");
+    es.onmessage = function (event) {
+        document.getElementById('x').innerHTML=event.data ;
+    };
+</script>
+Űrbőrágyú <div id='x'></div>
+  
