@@ -1,4 +1,4 @@
-let next="X", rak=0, es = new EventSource("/sse");
+let next="X", rak=0, base='/u/tnemeth_4/', es = new EventSource(base+"sse");
 var app = new Vue({
   el: '#app',
   data: {
