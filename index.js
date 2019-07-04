@@ -6,11 +6,11 @@ var SSE  = require('sse'),
     frontend;
 
 fs.readFile( './frontend.html', (err,s) => {
-    frontend = s.toString() ;
+  frontend = s.toString() ;
 });
 
 setInterval( () => {
-    clients.forEach( v => v.send('X-'+counter++) );
+  clients.forEach( v => v.send('X-'+counter++) );
 }, 5000);
 
 var server = http.createServer( (req, res) => {
