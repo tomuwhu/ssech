@@ -3,28 +3,64 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <h1>Űrbőrágyú</h1>
 <div id="app">
-    <div>{{ message }}</div>
+    <table>
+        <tr v-for="(row,j) in arr">
+            <td v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>
+        </tr>
+    </table>
     <hr>
-    <button @click="f('1-1')">x</button>
-    <button @click="f('1-2')">x</button>
+    <div>{{ message }}</div>
 </div>
 
 <script>
+let next="X", rak=0
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
     es: new EventSource("/sse"),
+    arr: Array(15).fill(0).map( v => Array(15).fill(' ') )
   },
   mounted() {
     this.es.onmessage = (event) => {
-        this.message=event.data ;
+        rak--
+        if (rak<0) rak=0;
+        this.message=event.data.split('-') ;
+        if (this.message[2]==="X") next="O"; else next="X" ;
+        this.$set( this.arr[Number(this.message[1])],Number(this.message[0]),this.message[2] )
     };
   },
   methods: {
-      f(s) {
-        axios.get('/'+s)
+      f(i,j) {
+        if (this.arr[j][i]===" " && rak===0) {
+            rak=2;
+            axios.get(`/${i}-${j}-${next}`)
+        }
+
       }
   }
 })
 </script>
+
+<style>
+td {
+    user-select: none;
+    width: 25px;
+    height:25px;
+    cursor:pointer;
+    border: solid 1px rgb(89, 107, 109);
+    text-align:center;
+    border-radius:6px;
+    background-color: #92b9bb;
+    color: snow;
+    box-shadow: 0 0 3px black;
+}
+td.O {
+    color: snow;
+    background-color: #48481a;
+}
+td.X {
+    color: snow;
+    background-color: #17524f;
+}
+</style>
