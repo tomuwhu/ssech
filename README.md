@@ -2,7 +2,7 @@
 
 Tic-Tac-Toe 2 player (sse)
 
-```shell
+```sh
 npm i
 node index.js
 ```
