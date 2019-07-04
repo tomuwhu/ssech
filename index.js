@@ -2,9 +2,8 @@ var SSE  = require('sse'),
     http = require('http'),
     rf   = require('./static'),
     ct   = [],
-//  myip = '192.168.1.103', //set your public ip
-    myip = '0.0.0.0',     //or localhost to test in locale
-    port = 3004,            //set your port number (http://192.168.1.103:8080/)
+    myip = '0.0.0.0',
+    port = 3004,
     base = '/' ;
 
 rf  .setenv('frontend');

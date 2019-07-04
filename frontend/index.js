@@ -1,4 +1,5 @@
-let next="X", rak=0, base='/u/tnemeth_4/', es = new EventSource(base+"sse");
+let next="X", rak=0, base='/', es = new EventSource(base+"sse");
+// base='/u/tnemeth_4/'; // inf-en
 var app = new Vue({
   el: '#app',
   data: {
@@ -27,7 +28,7 @@ var app = new Vue({
       f(i,j) {
         if (!this.nyert && this.arr[j][i]===" " && rak===0) {
             rak=2;
-            axios.get(base+`/${i}-${j}-${next}`)
+            axios.get(base+`${i}-${j}-${next}`)
         }
       }
   }
