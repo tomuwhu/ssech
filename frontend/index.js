@@ -1,18 +1,3 @@
-<meta charset='utf-8' />
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<h1>Amőba</h1>
-<div id="app">
-    <table>
-        <tr v-for="(row,j) in arr">
-            <td v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>
-        </tr>
-    </table>
-    <hr>
-    <div v-if="nyert">Nyert: {{ nyert }}</div>
-</div>
-
-<script>
 let next="X", rak=0,
     es = new EventSource("/sse");
 var app = new Vue({
@@ -48,28 +33,4 @@ var app = new Vue({
         }
       }
   }
-})
-</script>
-
-<style>
-td {
-    user-select: none;
-    width: 25px;
-    height:25px;
-    cursor:pointer;
-    border: solid 1px rgb(89, 107, 109);
-    text-align:center;
-    border-radius:6px;
-    background-color: #92b9bb;
-    color: snow;
-    box-shadow: 0 0 3px black;
-}
-td.O {
-    color: snow;
-    background-color: #48481a;
-}
-td.X {
-    color: snow;
-    background-color: #17524f;
-}
-</style>
+});

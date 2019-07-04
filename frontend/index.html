@@ -1,0 +1,10 @@
+<h1>Amőba</h1>
+<div id="app">
+    <table>
+        <tr v-for="(row,j) in arr">
+            <td v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>
+        </tr>
+    </table>
+    <hr>
+    <div v-if="nyert">Nyert: {{ nyert }}</div>
+</div>
