@@ -2,12 +2,15 @@ const fs = require('fs');
 
 const rf = {
 
-    hh: `
-<meta charset='utf-8' />
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>`,
+    hh: `<meta charset='utf-8' /><script src="vue.js"></script><script src="axios.min.js"></script>`,
 
     setenv( s, fn='index' ) {
+        fs.readFile( `./static/vue.js`, (err,v) => {
+            this.vuejs = v.toString() ;
+        });
+        fs.readFile( `./static/axios.min.js`, (err,v) => {
+            this.axiosjs = v.toString() ;
+        });
         fs.readFile( `./${ s }/${ fn }.html`, (err,v) => {
             if (v)
                 this.html = v.toString() ;
