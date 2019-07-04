@@ -1,5 +1,4 @@
-let next="X", rak=0,
-    es = new EventSource("/sse");
+let next="X", rak=0, es = new EventSource("/sse");
 var app = new Vue({
   el: '#app',
   data: {
@@ -8,8 +7,7 @@ var app = new Vue({
   },
   mounted() {
     es.onmessage = e => {
-        rak--;
-        if (rak<0) rak=0;
+        if (--rak<0) rak=0;
         let [x,y,p]=e.data.split('-') ;
         this.$set( this.arr[y],x,p );
         next=p==="X"?"O":"X";
