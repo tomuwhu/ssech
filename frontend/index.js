@@ -27,7 +27,7 @@ var app = new Vue({
       f(i,j) {
         if (!this.nyert && this.arr[j][i]===" " && rak===0) {
             rak=2;
-            axios.get(`/${i}-${j}-${next}`)
+            axios.get(base+`/${i}-${j}-${next}`)
         }
       }
   }
