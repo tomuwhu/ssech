@@ -15,10 +15,10 @@ var app = new Vue({
             .forEach( v => {
                 let xp=Number(x), yp=Number(y), maxh=0
                 while (this.arr[yp] && this.arr[yp][xp]===p) 
-                    xp+=v[0], yp+=v[1], maxh++;
+                    xp+=v[0], yp+=v[1], maxh++
                 xp=Number(x), yp=Number(y)
                 while (this.arr[yp] && this.arr[yp][xp]===p) 
-                    xp-=v[0], yp-=v[1], maxh++;
+                    xp-=v[0], yp-=v[1], maxh++
                 maxh>5 ? this.nyert = p : null
             });
     };
