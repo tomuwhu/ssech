@@ -1,10 +1,30 @@
 <meta charset='utf-8' />
-<script>
-    var es = new EventSource("/sse");
-    es.onmessage = function (event) {
-        document.getElementById('x').innerHTML=event.data ;
-    };
-</script>
-Űrbőrágyú <div id='x'></div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<h1>Űrbőrágyú</h1>
+<div id="app">
+    <div>{{ message }}</div>
+    <hr>
+    <button @click="f('1-1')">x</button>
+    <button @click="f('1-2')">x</button>
+</div>
 
-  
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    es: new EventSource("/sse"),
+  },
+  mounted() {
+    this.es.onmessage = (event) => {
+        this.message=event.data ;
+    };
+  },
+  methods: {
+      f(s) {
+        axios.get('/'+s)
+      }
+  }
+})
+</script>
