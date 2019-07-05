@@ -23,6 +23,7 @@ var app = new Vue({
                 maxh>5 ? this.nyert = p : null
             });
     };
+    es.onerror = e => es.close() ;
   },
   methods: {
       f(i,j) {

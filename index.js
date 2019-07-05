@@ -17,12 +17,21 @@ var server = http.createServer( (req, res) => {
     case base+'axios.min.map': res.end(null); break;
     case base+'favicon.ico': res.end(null); break;
     default: {
-        ct.forEach( v => v.send( req.url.slice(1) ) );
+        ct.forEach( v => {
+          v.c.send( req.url.slice(1) )
+        });
         res.end(null);
     }
   }
 });
  
-server.listen(port, myip, () => 
-  (new SSE(server)).on('connection', c => ct.push(c) )
-);
+server.listen(port, myip, () => {
+  let sse =new SSE(server);
+  sse.on('connection', c => {
+    ct.push({c, ts: Number( new Date() ) });
+  } );
+} );
+
+setInterval( () => {
+  ct = ct.filter( v => (Number( new Date() ) - v.ts < 1000000) );
+}, 1000000 );
