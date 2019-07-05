@@ -10,5 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "sse": "0.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomuwhu/ssech"
   }
 }
