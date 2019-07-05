@@ -5,22 +5,23 @@ table {
     margin: 0 auto;
 }
 td {
+    text-shadow: 0 0 2px black;
     user-select: none;
-    width: 25px;
-    height:25px;
+    width: 28px;
+    height:28px;
     cursor:pointer;
-    border: solid 1px rgb(89, 107, 109);
+    border: solid 1px rgb(89, 109, 108);
     text-align:center;
     border-radius:6px;
-    background-color: #92b9bb;
+    background-color: #97d3c8;
     color: snow;
     box-shadow: 0 0 3px black;
 }
 td.O {
-    color: snow;
-    background-color: #48481a;
+    color: rgb(22, 43, 128);
+    background-color: #d3dc2c;
 }
 td.X {
-    color: snow;
-    background-color: #17524f;
+    color: rgb(192, 237, 159);
+    background-color: #982907;
 }

@@ -3,7 +3,7 @@ let next="X", rak=0, base='/', es = new EventSource(base+"sse");
 var app = new Vue({
   el: '#app',
   data: {
-    arr: Array(15).fill(0).map( v => Array(15).fill(' ') ),
+    arr: Array(10).fill(0).map( v => Array(10).fill(' ') ),
     nyert: false
   },
   mounted() {
