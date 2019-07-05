@@ -13,7 +13,7 @@ var server = http.createServer( (req, res) => {
   if (req.url===base) res.end( rf.file() );
   else {   
     w = req.url.slice( 1 );
-    if ( w.split('-').length > 2 ) ct.forEach( v =>  v.c.send( w ) );
+    if ( w.includes('-') ) ct.map( v => v.c.send( w ) );
     res.end(null);
   }
 });
