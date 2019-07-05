@@ -23,9 +23,10 @@ const rf = {
 
     file() {
         return `
-            <script>${ this.axiosjs }</script>
-            ${ this.hh }\n${ this.html }
+            ${ this.hh }
             <style>${ this.css }</style>
+            <script>${ this.axiosjs }</script>
+            ${ this.html }
             <script>${ this.vuejs }${ this.js }</script>`;
     }
 
