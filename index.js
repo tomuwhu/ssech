@@ -11,12 +11,12 @@ var server = http.createServer( (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/html'});
   if (req.url===base) res.end( rf.file() );
   else {   
-    w = req.url.slice( 1 );
+    let w = req.url.slice( 1 );
     if ( w.includes('-') ) ct.map( v => v.c.send( w ) );
     res.end(null);
   }
 });
- 
+
 server.listen(port, '0.0.0.0', () => {
   let sse =new SSE(server);
   sse.on('connection', c => ct.push({c, ts: Number(new Date()) }) );
