@@ -18,7 +18,7 @@ var server = http.createServer( (req, res) => {
     case base+'favicon.ico': res.end(null); break;
     default: {
         ct.forEach( v => {
-          v.c.send( req.url.slice(1) )
+          v.c.send( req.url.slice(1) );
         });
         res.end(null);
     }
