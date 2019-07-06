@@ -25,6 +25,9 @@ var server = http.createServer( (req, res) => {
   if (req.method === 'GET') { 
     res.writeHead(200, {'Content-Type': 'text/html'});
     if (req.url===base) res.end( svc.vue({ title: 'Amőba' }) );
+    else if (req.url.replace( base, '' ) === 'clients') {
+      res.end( ct.map( v => v.ts ).join(', ') );
+    }
     else {
       //console.log('Kezeletlen get kérés: ', decodeURI( req.url.replace( base, '' ) ) );
       res.end(null);
