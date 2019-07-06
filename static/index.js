@@ -20,7 +20,12 @@ const rf = {
             <script>${ this.vuejs }</script>
             ${ this.html
                     .replace('<template>','')
+                    .replace('<div', '<div id="app"')
                     .replace('</template>','')
+                    .split('').reverse().join('')
+                    .replace(';}', ';)}')
+                    .split('').reverse().join('')
+                    .replace( 'export default {',"var app = new Vue({ el: '#app'," )
             }`;
     }
 

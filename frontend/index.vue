@@ -14,8 +14,7 @@
 <script>
 let next="X", rak=0, base='/', es = new EventSource(base+"sse");
 // base='/u/tnemeth_4/'; // inf-en
-var app = new Vue({
-  el: '#app',
+export default {
   data: {
     arr: Array(10).fill(0).map( v => Array(10).fill(' ') ),
     nyert: false
@@ -57,7 +56,7 @@ var app = new Vue({
         }
       }
   }
-});
+};
 </script>
 
 <style>
