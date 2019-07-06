@@ -11,4 +11,4 @@ node index.js
 
 [http://localhost:3004/](http://localhost:3004/)
 
-illetve a hálózat másik gépén a forrás gép ip címe alapján pl: http://192.168.0.103:3004/
+In another computer in local network for example: http://192.168.0.103:3004/

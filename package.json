@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "singlevue": "^1.0.1",
     "sse": "0.0.8"
   },
   "repository": {

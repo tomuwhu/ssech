@@ -1,15 +1,15 @@
 var SSE  = require('sse'),
     http = require('http'),
-    rf   = require('./static'),
+    svc  = require('singlevue'),
     ct   = [],
     port = 3004,
     base = '/' ;
 
-rf  .setenv();
+svc.read_vue('amoba');
 
 var server = http.createServer( (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/html'});
-  if (req.url===base) res.end( rf.file({ title: 'Amőba' }) );
+  if (req.url===base) res.end( svc.vue({ title: 'Amőba' }) );
   else {   
     let w = req.url.slice( 1 );
     if ( w.includes('-') ) ct.map( v => v.c.send( w ) );
