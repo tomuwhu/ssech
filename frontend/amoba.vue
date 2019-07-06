@@ -52,7 +52,7 @@ export default {
       f(i,j) {
         if (!this.nyert && this.arr[j][i]===" " && rak===0) {
             rak=2;
-            axios.get(base+`${i}-${j}-${next}`);
+            axios.post(base, { x: i, y: j, f: next } );
         }
       }
   }
