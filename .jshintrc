@@ -3,5 +3,10 @@
     "asi": true,
     "shadow": true,
     "undef": true,
-    "node": true
+    "node": true,
+    "globals" : {
+        "EventSource": true,
+        "Vue": true,
+        "axios":true
+    } 
 }
