@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <h1>Hálózatos amőba</h1>
+      <h1>{{ template.title }}</h1>
       <table>
           <tr :key="j" v-for="(row,j) in arr">
               <td :key="i" v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>

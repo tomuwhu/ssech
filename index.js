@@ -5,11 +5,11 @@ var SSE  = require('sse'),
     port = 3004,
     base = '/' ;
 
-rf  .setenv('frontend');
+rf  .setenv();
 
 var server = http.createServer( (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/html'});
-  if (req.url===base) res.end( rf.file() );
+  if (req.url===base) res.end( rf.file({ title: 'Amőba' }) );
   else {   
     let w = req.url.slice( 1 );
     if ( w.includes('-') ) ct.map( v => v.c.send( w ) );
@@ -17,10 +17,10 @@ var server = http.createServer( (req, res) => {
   }
 });
 
-server.listen(port, '0.0.0.0', () => {
-  let sse =new SSE(server);
-  sse.on('connection', c => ct.push({c, ts: Number(new Date()) }) );
-} );
+server.listen(port, '0.0.0.0', () => 
+  new SSE(server)
+        .on('connection', c => ct.push({c, ts: Number(new Date()) }) )
+);
 
 setInterval( () =>  
   ct = ct.filter( v => (Number( new Date() ) - v.ts < 1000000) ), 1000000 

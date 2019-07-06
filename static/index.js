@@ -4,7 +4,7 @@ const rf = {
 
     hh: `<meta charset='utf-8' />`,
 
-    setenv( s, fn='index' ) {
+    setenv( s='frontend', fn='index' ) {
         fs.readFile( `./static/vue.js`, (err,v) => this.vuejs = v.toString() );
         fs.readFile( `./static/axios.min.js`, (err,v) => this.axiosjs = v.toString() );
         fs.readFile( `./${ s }/${ fn }.vue`, (err,v) => {
@@ -13,7 +13,7 @@ const rf = {
         });
     },
 
-    file() {
+    file(data) {
         return `
             ${ this.hh }
             <script>${ this.axiosjs }</script>
@@ -21,6 +21,7 @@ const rf = {
             ${ this.html
                     .replace('<template>','')
                     .replace('<div', '<div id="app"')
+                    .replace('data: {',` data: { template: JSON.parse('${ JSON.stringify(data) }'),`)
                     .replace('</template>','')
                     .split('').reverse().join('')
                     .replace(';}', ';)}')
