@@ -1,3 +1,17 @@
+<template>
+  <div id="app">
+      <h1>Hálózatos amőba</h1>
+      <table>
+          <tr :key="j" v-for="(row,j) in arr">
+              <td :key="i" v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>
+          </tr>
+      </table>
+      <hr>
+      <div v-if="nyert" v-html="nyert" ></div>
+  </div>
+</template>
+
+<script>
 let next="X", rak=0, base='/', es = new EventSource(base+"sse");
 // base='/u/tnemeth_4/'; // inf-en
 var app = new Vue({
@@ -44,3 +58,34 @@ var app = new Vue({
       }
   }
 });
+</script>
+
+<style>
+#app, h1 {
+    text-align: center;
+}
+table {
+    margin: 0 auto;
+}
+td {
+    text-shadow: 0 0 2px black;
+    user-select: none;
+    width: 28px;
+    height:28px;
+    cursor:pointer;
+    border: solid 1px rgb(89, 109, 108);
+    text-align:center;
+    border-radius:3px;
+    background-color: #d7daa7;
+    color: snow;
+    box-shadow: 0 0 3px black;
+}
+td.O {
+    color: rgb(240, 239, 199);
+    background-color: #197596;
+}
+td.X {
+    color: rgb(192, 237, 159);
+    background-color: #982907;
+}
+</style>
