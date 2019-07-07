@@ -1,12 +1,11 @@
 var SSE  = require('sse'),
     http = require('http'),
-    svc  = require('singlevue'),
+    Svc  = require('singlevue'),
+    svc = new Svc('amoba'),
   { parse } = require('querystring'),
     ct   = [],
     port = 3004,
     base = '/' ;
-
-svc.read_vue('amoba');
 
 var server = http.createServer( (req, res) => {
   if (req.method === 'POST') {
