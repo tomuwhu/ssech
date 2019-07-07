@@ -1,7 +1,7 @@
 var SSE     = require('sse'),
     http    = require('http'),
   { Svc, 
-    serve } = require('singlevue'),
+    rest } = require('singlevue'),
     amoba   = new Svc('amoba'),
     ct      = [],
     port    = 3004,
@@ -9,20 +9,23 @@ var SSE     = require('sse'),
 
 var server = http.createServer( (req, res) => {
   if (req.method === 'POST') {
-    serve.postparse( req, w => {
+    rest.postparse( req, w => {
       ct.map( v => v.c.send( `${w.x}-${w.y}-${w.f}` ) );
-      serve.send( res, JSON.stringify({x: 'ok'}));
+      rest.sendJSON( res, {x: 'ok'} );
     } )
   }
-  if (req.method === 'GET') { 
-    if (req.url===base) serve.send( res, amoba.vue({ title: 'Amőba' }) );
+  else if (req.method === 'GET') { 
+    if (req.url===base) rest.send( res, amoba.vue({ title: 'Amőba' }) );
     else if (req.url.replace( base, '' ) === 'clients') {
-      serve.send( res, 'Clientlist: ' + ct.map( v => v.ts ).join(', ') )
+      rest.send( res, 'Clientlist: ' + ct.map( v => v.ts ).join(', ') )
     }
     else {
-      serve.getparse(req, w => console.log('Kezeletlen GET kérés: ', w) );
-      serve.send( res );
+      //rest.getparse(req, w => console.log('Kezeletlen GET kérés: ', w) );
+      rest.send( res );
     }
+  } else {
+    console.log(`Kezeletlen ${ req.method } kérés!`);
+    rest.send( res );
   }
 });
 
