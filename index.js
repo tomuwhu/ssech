@@ -15,7 +15,7 @@ var server = http.createServer( (req, res) => {
     } )
   }
   else if (req.method === 'GET') { 
-    if (req.url===base) rest.send( res, amoba.vue({ title: 'Amőba' }) );
+    if (req.url===base) rest.send( res, amoba.vue({ title: `Amőba: ${ ct.length + 1 }` }) );
     else if (req.url.replace( base, '' ) === 'clients') {
       rest.sendJSON( res, ct.map(v => v.c.req.headers['user-agent'] ) )
     }
