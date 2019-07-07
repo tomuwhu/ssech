@@ -17,7 +17,7 @@ var server = http.createServer( (req, res) => {
   else if (req.method === 'GET') { 
     if (req.url===base) rest.send( res, amoba.vue({ title: 'Amőba' }) );
     else if (req.url.replace( base, '' ) === 'clients') {
-      rest.send( res, 'Clientlist: ' + ct.map( v => v.ts ).join(', ') )
+      rest.sendJSON( res, ct.map(v => v.c.req.headers['user-agent'] ) )
     }
     else {
       //rest.getparse(req, w => console.log('Kezeletlen GET kérés: ', w) );

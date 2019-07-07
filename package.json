@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "querystring": "^0.2.0",
-    "singlevue": "^1.0.8",
+    "singlevue": "^1.0.9",
     "sse": "0.0.8"
   },
   "repository": {
