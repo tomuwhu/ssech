@@ -7,7 +7,7 @@
           </tr>
       </table>
       <hr>
-      <div v-if="nyert" v-html="nyert" ></div>
+      <div v-if="nyert" v-html="nyert" ></div>{{ conn }}
   </div>
 </template>
 
@@ -17,7 +17,8 @@ let next="X", rak=0, base='/', es = new EventSource(base+"sse");
 export default {
   data: {
     arr: Array(10).fill(0).map( v => Array(10).fill(' ') ),
-    nyert: false
+    nyert: false,
+    conn: 0
   },
   mounted() {
     es.onmessage = e => {
@@ -52,7 +53,9 @@ export default {
       f(i,j) {
         if (!this.nyert && this.arr[j][i]===" " && rak===0) {
             rak=2;
-            axios.post(base, { x: i, y: j, f: next } );
+            axios
+              .post(base, { x: i, y: j, f: next } )
+              .then(resp => this.conn = resp.data.x );
         }
       }
   }
