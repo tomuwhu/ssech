@@ -54,7 +54,7 @@ export default {
         if (!this.nyert && this.arr[j][i]===" " && rak===0) {
             rak=2;
             axios
-              .post(base, { x: i, y: j, f: next } )
+              .post('/u/tnemeth_5/', { x: i, y: j, f: next } )
               .then(resp => this.conn = resp.data.x );
         }
       }
