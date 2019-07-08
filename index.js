@@ -6,17 +6,24 @@ var SSE    = require('sse'),
     port   = 3005;
 
 app.get( '/' , (req,res)=> {
-  res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
+  res.send(amoba.vue({ title: `Amőba` } ) ) ;
 });
 
 app.post( '/' ,(req,res) => {
-  ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
+  ct.map( (v,i) => {
+    if ( v.id == req.body.id1 ||  v.id == req.body.id2 )
+      v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}-${req.body.id1}-${req.body.id2}` )
+  });
   res.sendJSON( {x: ct.length } );
 });
 
 app.listen(port, server => 
   new SSE(server)
-        .on('connection', c => ct.push({c, ts: Number(new Date()) }) )
+        .on('connection', c => {
+          let cs = {c, ts: Number(new Date()), id: Math.round(Math.random()*8999)+1000 }
+          ct.push(cs); 
+          c.send('id-'+cs.id.toString());
+        } )
 );
 
 setInterval( () =>  
