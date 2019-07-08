@@ -1,20 +1,20 @@
 var SSE    = require('sse'),
   { Svc, 
-    rest } = require('singlevue'),
+    app } = require('singlevue'),
     amoba  = new Svc('amoba'),
     ct     = [],
     port   = 3004;
 
-rest.get('/', (req,res)=> {
-  rest.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
+app.get('/', (req,res)=> {
+  res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
 });
 
-rest.post( '/' ,(req,res) => {
+app.post( '/' ,(req,res) => {
   ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
-  rest.sendJSON( {x: 'ok'} );
+  res.sendJSON( {x: 'ok'} );
 });
 
-rest.listen(port, server => 
+app.listen(port, server => 
   new SSE(server)
         .on('connection', c => ct.push({c, ts: Number(new Date()) }) )
 );
