@@ -26,8 +26,8 @@
 </template>
 
 <script>
-let base='/u/tnemeth_4/'; // inf-en
-//let base='/';
+//let base='/u/tnemeth_4/'; // inf-en
+let base='/';
 let next="X", rak=0, es = new EventSource(base+"sse");
 function ures() {
   return Array(10).fill(0).map( v => Array(10).fill(' ') );
