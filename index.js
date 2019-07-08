@@ -1,35 +1,20 @@
-var SSE     = require('sse'),
-    http    = require('http'),
+var SSE    = require('sse'),
   { Svc, 
     rest } = require('singlevue'),
-    amoba   = new Svc('amoba'),
-    ct      = [],
-    port    = 3004,
-    base    = '/' ;
+    amoba  = new Svc('amoba'),
+    ct     = [],
+    port   = 3004;
 
-var server = http.createServer( (req, res) => {
-  if (req.method === 'POST') {
-    rest.postparse( req, w => {
-      ct.map( v => v.c.send( `${w.x}-${w.y}-${w.f}` ) );
-      rest.sendJSON( res, {x: 'ok'} );
-    } )
-  }
-  else if (req.method === 'GET') { 
-    if (req.url===base) rest.send( res, amoba.vue({ title: `Amőba: ${ ct.length + 1 }` }) );
-    else if (req.url.replace( base, '' ) === 'clients') {
-      rest.sendJSON( res, ct.map(v => v.c.req.headers['user-agent'] ) )
-    }
-    else {
-      //rest.getparse(req, w => console.log('Kezeletlen GET kérés: ', w) );
-      rest.send( res );
-    }
-  } else {
-    console.log(`Kezeletlen ${ req.method } kérés!`);
-    rest.send( res );
-  }
+rest.get('/', (req,res)=> {
+  rest.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
 });
 
-server.listen(port, '0.0.0.0', () => 
+rest.post( '/' ,(req,res) => {
+  ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
+  rest.sendJSON( {x: 'ok'} );
+});
+
+rest.listen(port, server => 
   new SSE(server)
         .on('connection', c => ct.push({c, ts: Number(new Date()) }) )
 );
