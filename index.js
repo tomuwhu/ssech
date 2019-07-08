@@ -6,11 +6,11 @@ var SSE    = require('sse'),
     base   = '/u/tnemeth_5/',
     port   = 3005;
 
-app.get( base, (req,res)=> {
+app.get( "/" , (req,res)=> {
   res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
 });
 
-app.post( base ,(req,res) => {
+app.post( "/" ,(req,res) => {
   ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
   res.sendJSON( {x: ct.length } );
 });
