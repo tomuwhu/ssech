@@ -12,7 +12,8 @@
 </template>
 
 <script>
-let base='/u/tnemeth_5/'; // inf-en
+//let base='/u/tnemeth_5/'; // inf-en
+let base='/';
 let next="X", rak=0, es = new EventSource(base+"sse");
 export default {
   data: {

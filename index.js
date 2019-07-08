@@ -3,7 +3,6 @@ var SSE    = require('sse'),
     app } = require('singlevue'),
     amoba  = new Svc('amoba'),
     ct     = [],
-    base   = '/u/tnemeth_5/',
     port   = 3005;
 
 app.get( "/" , (req,res)=> {
