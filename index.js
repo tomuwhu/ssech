@@ -1,9 +1,8 @@
 var SSE    = require('sse'),
   { Svc, 
-    app } = require('singlevue'),
+    app }  = require('singlevue'),
     amoba  = new Svc('amoba'),
-    ct     = [],
-    port   = 3004;
+    ct     = [];
 
 app.get( '/', (req,res)=> {
   res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
@@ -14,7 +13,7 @@ app.post( '/' ,(req,res) => {
   res.sendJSON( {x: ct.length } );
 });
 
-app.listen(port, server => 
+app.listen(3004, server => 
   new SSE(server)
         .on('connection', c => ct.push({c, ts: Number(new Date()) }) )
 );
