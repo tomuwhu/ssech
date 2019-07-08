@@ -10,7 +10,10 @@
           </tr>
       </table>
       <hr>
-      <input value="Ellenfél" disabled><input placeholder="ID" v-model="opponent" />
+      <input value="Ellenfél" disabled>
+      <input placeholder="ID" 
+             v-model="opponent"
+             :disabled="opponent==='-----'" />
       <hr>
       <span v-if="nyert" >
         <div v-html="nyert" ></div>
@@ -72,6 +75,8 @@ export default {
     };
     es.onerror = e => {
       this.nyert="Kapcsolat megszakadt!";
+      this.id='-'
+      this.opponent='-----'
       es.close() ;
     };
   },
@@ -81,7 +86,8 @@ export default {
               .post( base, { x: 'uj', y: 0, f: "!", id1: this.opponent, id2: this.id } );
       },
       f(i,j) {
-        if (!this.nyert && this.arr[j][i]===" " && rak===0 && this.opponent.length===4) {
+        if (!this.nyert && this.arr[j][i]===" " && this.opponent!=this.id &&
+            rak===0 && this.opponent.length===4 ) {
             rak=2;
             axios
               .post( base, { x: i, y: j, f: next, id1: this.opponent, id2: this.id } )
