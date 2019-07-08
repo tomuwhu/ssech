@@ -5,11 +5,11 @@ var SSE    = require('sse'),
     ct     = [],
     port   = 3005;
 
-app.get( "/" , (req,res)=> {
+app.get( '/' , (req,res)=> {
   res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
 });
 
-app.post( "/" ,(req,res) => {
+app.post( '/' ,(req,res) => {
   ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
   res.sendJSON( {x: ct.length } );
 });
