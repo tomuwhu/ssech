@@ -1,9 +1,9 @@
 <template>
   <div id="app">
       <h1 v-html="`${ template.title } (ID: ${ id })`">dd</h1>
-      <span class="mini">
+      <div class="mini">
         Aktív játékosok száma belépéskor: {{ conn }}
-      </span>
+      </div>
       <table>
           <tr :key="j" v-for="(row,j) in arr">
               <td :key="i" v-for="(e,i) in row" @click="f(i,j)" :class="e" >{{e}}</td>
@@ -15,7 +15,8 @@
       <span v-if="nyert" >
         <div v-html="nyert" ></div>
         <br><br>
-        <button @click="uj()">Új játék</button>
+        <button v-if="nyert!='Kapcsolat megszakadt!'" @click="uj()">Új játék</button>
+        <a href="/" v-else>Új játék</a>
         <br>
       </span>
   </div>
@@ -45,7 +46,6 @@ export default {
         } 
         else if (x==='id') {
           this.id=y;
-          console.log(y);
         }
         else {
           if (--rak<0) rak=0;
@@ -77,7 +77,6 @@ export default {
   },
   methods: {
       uj() {
-        console.log('uj');
         axios
               .post( base, { x: 'uj', y: 0, f: "!", id1: this.opponent, id2: this.id } );
       },
@@ -94,11 +93,14 @@ export default {
 </script>
 
 <style>
+h1 {
+  height: 20px;
+}
 #app, h1, input {
     text-align: center;
 }
 button {
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
 }
 input {
@@ -106,7 +108,8 @@ input {
     width: 75px;
 }
 .mini{
-    font-size: 10px;
+    font-size: 14px;
+    height: 20px;
 }
 table {
     margin: 0 auto;
