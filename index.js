@@ -3,13 +3,14 @@ var SSE    = require('sse'),
     app } = require('singlevue'),
     amoba  = new Svc('amoba'),
     ct     = [],
-    port   = 3004;
+    base='/u/tnemeth_5/',
+    port   = 3005;
 
-app.get( '/', (req,res)=> {
+app.get( base, (req,res)=> {
   res.send(amoba.vue({title: `Amőba: ${ ct.length + 1 }`}));
 });
 
-app.post( '/' ,(req,res) => {
+app.post( base ,(req,res) => {
   ct.map( v => v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}` ) );
   res.sendJSON( {x: ct.length } );
 });
