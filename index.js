@@ -3,7 +3,7 @@ var SSE    = require('sse'),
     app } = require('singlevue'),
     amoba  = new Svc('amoba'),
     ct     = [],
-    port   = 3005;
+    port   = 3004;
 
 app.get( '/' , (req,res)=> {
   res.send(amoba.vue({ title: `Amőba` } ) ) ;
