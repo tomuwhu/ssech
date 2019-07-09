@@ -1,12 +1,37 @@
-var SSE    = require('sse'),
+var SSE     = require('sse'),
   { Svc, 
-    app } = require('singlevue'),
-    amoba  = new Svc('amoba'),
-    ct     = [],
-    port   = 3004;
+    app }   = require('singlevue'),
+    amoba   = new Svc('amoba'),
+    reversi = new Svc('reversi'),
+    ct      = [],
+    port    = 3004;
+
+app.get( '/amoba/' , (req,res)=> {
+  res.send(amoba.vue({ title: `Amőba` } ) ) ;
+});
 
 app.get( '/' , (req,res)=> {
-  res.send(amoba.vue({ title: `Amőba` } ) ) ;
+  res.send(`
+    <h1>Hálózatos táblajátékok - példaprogram</h1>
+    <a href="./amoba/">Amőba</a> - -
+    <a href="./reversi/">Reversi</a><br>
+    <hr>
+    <a href="https://github.com/tomuwhu/ssech" target="_blank">Forrás</a>
+    <style>
+      body{
+        color: #236534;
+        text-shadow: 0 0 1px #111111;
+        text-align:center;
+      }
+      a {
+        font-size: 25px;
+      }
+    </stye>
+  `) ;
+});
+
+app.get( '/reversi/' , (req,res)=> {
+  res.send(reversi.vue({ title: `Reversi` } ) ) ;
 });
 
 app.post( '/' ,(req,res) => {

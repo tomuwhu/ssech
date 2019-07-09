@@ -21,32 +21,47 @@
              v-model="opponent"
              :disabled="opponent==='-----'" />
       <hr>
-      <span v-if="nyert" >
+      <div v-if="nyert" class="nyert">
         <div v-html="nyert" ></div>
-        <br><br>
+        <br>
         <button 
           v-if="nyert!='Kapcsolat megszakadt!'" 
           @click="uj()">Új játék</button>
         <a href="./" v-else>Új játék</a>
         <br>
-      </span>
+      </div>
+      <table>
+        <tr>
+            <th colspan=5>
+                Eredménytábla
+            </th>
+        </tr>
+        <tr>
+            <td class="X">X</td>
+            <td class="X">{{ fsz.X }}</td>
+            <td> - </td>
+            <td class="O">{{ fsz.O }}</td>
+            <td class="O">O</td>
+        </tr>
+      </table>
   </div>
 </template>
 
 <script>
 //const base='/u/tnemeth_4/'; // inf-en
 const base='/';
-let next="X", rak=0, 
+let next="X", rak=0, szt, size=10
     es = new EventSource(base+"sse");
 function ures() {
-  return Array(10)
+  return Array(size)
           .fill(0)
-          .map( v => Array(10).fill(' ') );
+          .map( v => Array(size).fill(' ') );
 } 
 export default {
   data: {
     arr: ures(),
     nyert: false,
+    fsz: { X: 0, O: 0 },
     conn: 0,
     id: 0,
     opponent: ''
@@ -57,36 +72,44 @@ export default {
         if (x==='uj') {
           this.arr=ures() ;
           this.nyert='' ;
+          this.fsz = { X: 0, O: 0 };
         } 
         else if (x==='id') {
           this.id=y;
         }
         else {
-          if (--rak<0) rak=0;
-          this.$set( this.arr[y],x,p );
-                  next=p==="X"?"O":"X";
-                  [[1,1],[1,0],[0,1],[-1,1]]
-                      .forEach( v => {
-                          let xp=Number(x), 
-                              yp=Number(y), 
-                              maxh=0;
-                          while ( this.arr[yp] &&
-                                  this.arr[yp][xp]===p) {
-                            xp+=v[0];
-                            yp+=v[1];
-                            maxh++;
-                          }
-                          xp=Number(x);
-                          yp=Number(y);
-                          while ( this.arr[yp] && 
-                                  this.arr[yp][xp]===p){
-                            xp-=v[0];
-                            yp-=v[1];
-                            maxh++;
-                          }
-                          if ( maxh>5) 
-                            this.nyert = `Nyert: <b>${ p }</b>`;
-                      });
+            if (--rak<0) rak=0;
+            this.$set( this.arr[y],x,p );
+            this.fsz[p]++;
+            next=p==="X"?"O":"X";
+            [
+            [1,1],[1,0],[0,1],[-1,1],
+            [-1,-1],[-1,0],[0,-1],[1,-1]
+            ]
+                .forEach( v => {
+                szt=[];
+                let xp=Number(x), 
+                    yp=Number(y);
+                do {
+                    yp+=v[0];
+                    xp+=v[1];                           
+                    if (this.arr[yp] && this.arr[yp][xp]===next) {
+                        szt.push({yp,xp});
+                    }
+                } while (
+                    xp >= 0 && yp >= 0 && xp < size && yp < size &&
+                    this.arr[yp][xp] !==p && this.arr[yp][xp]!==' '
+                );       
+                if (this.arr[yp] && szt.length && this.arr[yp][xp]===p) {
+                    szt.forEach( q => {
+                        this.$set( this.arr[q.yp], q.xp, p)
+                        this.fsz[p]++
+                        this.fsz[next]--
+                    })
+                };
+                });
+            if ( this.fsz.O + this.fsz.X === size**2 ) 
+                this.nyert = this.fsz.O > this.fsz.X ? "O" : "X";
         }; 
     };
     es.onerror = e => {
@@ -160,7 +183,7 @@ td {
     text-align:center;
     border-radius:3px;
     background-color: #d7daa7;
-    color: snow;
+    color: rgb(109, 45, 45);
     box-shadow: 0 0 3px black;
 }
 td.O {
