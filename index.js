@@ -11,8 +11,19 @@ app.get( '/' , (req,res)=> {
 
 app.post( '/' ,(req,res) => {
   ct.map( (v,i) => {
-    if ( v.id == req.body.id1 ||  v.id == req.body.id2 )
-      v.c.send( `${req.body.x}-${req.body.y}-${req.body.f}-${req.body.id1}-${req.body.id2}` )
+    if ( v.id == req.body.id1 ||  
+         v.id == req.body.id2 )
+      v.c.send( `${
+        req.body.x
+      }-${
+        req.body.y
+      }-${
+        req.body.f
+      }-${
+        req.body.id1
+      }-${
+        req.body.id2
+      }` )
   });
   res.sendJSON( {x: ct.length } );
 });
@@ -20,12 +31,18 @@ app.post( '/' ,(req,res) => {
 app.listen(port, server => 
   new SSE(server)
         .on('connection', c => {
-          let cs = {c, ts: Number(new Date()), id: Math.round(Math.random()*8999)+1000 }
+          let cs = {
+            c, 
+            ts: Number(new Date()), 
+            id: Math.round(Math.random()*8999)+1000 
+          }
           ct.push(cs); 
           c.send('id-'+cs.id.toString());
         } )
 );
 
 setInterval( () =>  
-  ct = ct.filter( v => (Number( new Date() ) - v.ts < 1000000) ), 1000000 
+  ct = ct.filter( v => 
+    (Number( new Date() ) - v.ts < 1000000) 
+  ), 1000000 
 );
