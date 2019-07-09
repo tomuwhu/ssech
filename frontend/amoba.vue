@@ -30,7 +30,6 @@
         <a :href="base" v-else>Új játék</a>
         <br>
       </span>
-      {{ base }}
   </div>
 </template>
 
