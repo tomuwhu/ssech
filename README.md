@@ -1,6 +1,9 @@
 # ssech
 
-Netwok 2 player games with sse.
+Netwok based 2 players games with sse.
+
+- vue sinle file components
+- sse and rest communication
 
 ## Requirements
 
