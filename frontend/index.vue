@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Hálózatos táblajátékok - példaprogram</h1>
+        <br>
         <a href="./amoba/">Amőba</a> - -
         <a href="./reversi/">Reversi</a><br>
         <hr>
@@ -19,12 +20,24 @@ export default {
 </script>
 
 <style>
-    body{
-    color: #236534;
-    text-shadow: 0 0 1px #111111;
+#app {
+    margin:30px;
+    padding:20px;
+    background-color: #efdece;
     text-align:center;
-    }
-    a {
+    border-radius: 20px;
+    box-shadow: 0 0 3px black;
+}
+h1 {
+    color: #0a1357;
+    text-shadow: 0 0 3px #111111;
+    margin:30px;
+    padding:20px;
+    border-radius: 5px;
+    box-shadow: 0 0 6px black;
+    background-color: #9fbbba;
+}
+a {
     font-size: 25px;
-    }
+}
 </style>
