@@ -34,8 +34,8 @@
 </template>
 
 <script>
-//const base='/u/tnemeth_4/'; // inf-en
-const base='/';
+const base='/u/tnemeth_5/'; // inf-en
+//const base='/';
 let next="X", rak=0, 
     es = new EventSource(base+"sse");
 function ures() {

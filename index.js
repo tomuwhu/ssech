@@ -5,7 +5,7 @@ var SSE     = require('sse'),
     reversi = new Svc('reversi'),
     main    = new Svc(),
     ct      = [],
-    port    = 3004;
+    port    = 3005;
 
 app.get( '/amoba/' , (req,res)=> {
   res.send(amoba.vue({ title: `Amőba` } ) ) ;
