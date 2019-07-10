@@ -2,7 +2,7 @@
 
 Netwok based 2 players games with sse.
 
-- vue sinle file components
+- vue single file components
 - sse and rest communication
 
 ## Requirements
