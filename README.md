@@ -16,7 +16,7 @@ Netwok based 2 players games with sse.
 git clone https://github.com/tomuwhu/ssech
 cd ssech
 npm i
-node index.js
+npm start
 ```
 
 In your browser:

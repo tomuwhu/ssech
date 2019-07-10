@@ -38,7 +38,8 @@ app.post( '/' ,(req,res) => {
   res.sendJSON( {x: ct.length } );
 });
 
-app.listen(port, server => 
+app.listen(port, server => {
+  console.log('server is runnning on http://localhost:'+port);
   new SSE(server)
         .on('connection', c => {
           let cs = {
@@ -49,7 +50,7 @@ app.listen(port, server =>
           ct.push(cs); 
           c.send('id-'+cs.id.toString());
         } )
-);
+});
 
 setInterval( () =>  
   ct = ct.filter( v => 
