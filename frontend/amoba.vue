@@ -30,12 +30,26 @@
         <a href="./" v-else>Új játék</a>
         <br>
       </span>
+      <span v-else>
+        <table>
+          <tr>
+              <th colspan="3">
+                  Következő
+              </th>
+          </tr>
+          <tr>
+              <td :class="next==='X'?'X':''">X</td>
+              <td> - </td>
+              <td :class="next==='O'?'O':''">O</td>
+          </tr>
+        </table>
+      </span>
   </div>
 </template>
 
 <script>
-const base='/u/tnemeth_5/'; // inf-en
-//const base='/';
+//const base='/u/tnemeth_5/'; // inf-en
+const base='/';
 let next="X", rak=0, 
     es = new EventSource(base+"sse");
 function ures() {
@@ -49,7 +63,8 @@ export default {
     nyert: false,
     conn: 0,
     id: 0,
-    opponent: ''
+    opponent: '',
+    next
   },
   mounted() {
     es.onmessage = e => {
@@ -65,6 +80,7 @@ export default {
           if (--rak<0) rak=0;
           this.$set( this.arr[y],x,p );
                   next=p==="X"?"O":"X";
+                  this.next=next;
                   [[1,1],[1,0],[0,1],[-1,1]]
                       .forEach( v => {
                           let xp=Number(x), 

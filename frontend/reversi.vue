@@ -37,19 +37,19 @@
             </th>
         </tr>
         <tr>
-            <td class="X">X</td>
-            <td class="X">{{ fsz.X }}</td>
+            <td :class="next==='X'?'X':''">X</td>
+            <td :class="next==='X'?'X':''">{{ fsz.X }}</td>
             <td> - </td>
-            <td class="O">{{ fsz.O }}</td>
-            <td class="O">O</td>
+            <td :class="next==='O'?'O':''">{{ fsz.O }}</td>
+            <td :class="next==='O'?'O':''">O</td>
         </tr>
       </table>
   </div>
 </template>
 
 <script>
-const base='/u/tnemeth_5/'; // inf-en
-//const base='/';
+//const base='/u/tnemeth_5/'; // inf-en
+const base='/';
 let next="X", rak=0, szt, size=10
     es = new EventSource(base+"sse");
 function ures() {
@@ -64,7 +64,8 @@ export default {
     fsz: { X: 0, O: 0 },
     conn: 0,
     id: 0,
-    opponent: ''
+    opponent: '',
+    next
   },
   mounted() {
     es.onmessage = e => {
@@ -82,6 +83,7 @@ export default {
             this.$set( this.arr[y],x,p );
             this.fsz[p]++;
             next=p==="X"?"O":"X";
+            this.next=next;
             [
             [1,1],[1,0],[0,1],[-1,1],
             [-1,-1],[-1,0],[0,-1],[1,-1]
