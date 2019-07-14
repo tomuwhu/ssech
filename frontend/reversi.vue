@@ -29,6 +29,7 @@
           @click="uj()">Új játék</button>
         <a href="./" v-else>Új játék</a>
         <br>
+        <br>
       </div>
       <table>
         <tr>
@@ -39,7 +40,7 @@
         <tr>
             <td :class="next==='X'?'X':''">X</td>
             <td :class="next==='X'?'X':''">{{ fsz.X }}</td>
-            <td> - </td>
+            <td class="B"> - - - </td>
             <td :class="next==='O'?'O':''">{{ fsz.O }}</td>
             <td :class="next==='O'?'O':''">O</td>
         </tr>
@@ -159,6 +160,7 @@ h1 {
 }
 #app, h1, input {
     text-align: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 button {
     font-size: 17px;
@@ -188,6 +190,9 @@ td {
     color: rgb(109, 45, 45);
     box-shadow: 0 0 3px black;
 }
+th {
+    height: 30px;
+}
 td.O {
     color: rgb(240, 239, 199);
     background-color: #197596;
@@ -195,5 +200,23 @@ td.O {
 td.X {
     color: rgb(192, 237, 159);
     background-color: #982907;
+}
+td.B {
+    color: rgb(192, 237, 159);
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+a {
+    background-color: #d7daa7;
+    color: rgb(109, 45, 45);
+    box-shadow: 0 0 3px black;
+    border-radius:3px;
+    text-decoration: none;
+    padding: 6px;
+    margin: 10px;
+}
+a:hover {
+    background-color: #a3a57c;
 }
 </style>
